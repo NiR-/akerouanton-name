@@ -1,0 +1,16 @@
+{
+    "name": "cv", 
+    "version": "0.1.0", 
+    "dependencies": {
+        "grunt": "~0.4.1", 
+        "grunt-contrib-less": "*", 
+        "grunt-contrib-uglify": "*", 
+        "grunt-contrib-copy": "*", 
+        "bower": "*", 
+        "grunt-exec": "*", 
+        "grunt-contrib-watch": "*"
+    }, 
+    "engines": {
+        "npm": "1.2.x"
+    }
+}
