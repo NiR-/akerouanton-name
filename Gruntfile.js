@@ -44,7 +44,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-exec');
-    grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask('default', ['less', 'uglify', 'copy', 'exec:build']);
     grunt.registerTask('serve', ['less', 'uglify', 'copy', 'exec:serve']);
