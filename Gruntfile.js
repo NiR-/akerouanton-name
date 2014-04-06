@@ -6,9 +6,9 @@ module.exports = function (grunt) {
                     paths: ["bower_components/bootstrap/less"], 
                     yuicompress: true
                 }, 
-            }, 
-            files: {
-                "assets/css/main.min.css": "assets/_less/main.less"
+                files: {
+                    "assets/css/main.min.css": "assets/_less/main.less"
+                }
             }
         }, 
         uglify: {
