@@ -56,24 +56,53 @@ header {
 
 body.cv {
 	#content {
-		.row > div {
-			.make-sm-column(12);
-			.make-md-column(6);
-		}
+		.row {
+			margin-bottom: 10px;
 
-		.row:last-child > div {
-			.make-sm-column(12);
-			.make-md-column(5);
+			&:first-child > div {
+				.make-sm-column(6);
+				.make-xs-column(12);
+				
+				&.contact {
+					margin-top: 20px;
 
-			&.langues {
+					.label {
+						margin-bottom: 5px;
+					}
+				}
+			}
+
+			& > div {
 				.make-sm-column(12);
-				.make-md-column(2);
+				.make-md-column(6);
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+
+				& > div {
+					.make-sm-column(12);
+					.make-md-column(5);
+
+					&.langues {
+						.make-sm-column(12);
+						.make-md-column(2);
+					}
+				}
 			}
 		}
 
 		.jumbotron {
 			h1 {
 				margin-bottom: 5px;
+			}
+		}
+
+		ul li {
+			margin-bottom: 3px;
+
+			&:last-child {
+				margin-bottom: 0;
 			}
 		}
 	}

@@ -2219,6 +2219,29 @@ header nav ul li a {
     width: 1170px;
   }
 }
+body.cv #content .row {
+  margin-bottom: 10px;
+}
+body.cv #content .row:first-child > div {
+  position: relative;
+  float: left;
+  width: 100%;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 768px) {
+  body.cv #content .row:first-child > div {
+    float: left;
+    width: 50%;
+  }
+}
+body.cv #content .row:first-child > div.contact {
+  margin-top: 20px;
+}
+body.cv #content .row:first-child > div.contact .label {
+  margin-bottom: 5px;
+}
 body.cv #content .row > div {
   position: relative;
   min-height: 1px;
@@ -2236,6 +2259,9 @@ body.cv #content .row > div {
     float: left;
     width: 50%;
   }
+}
+body.cv #content .row:last-child {
+  margin-bottom: 0;
 }
 body.cv #content .row:last-child > div {
   position: relative;
@@ -2276,6 +2302,12 @@ body.cv #content .row:last-child > div.langues {
 body.cv #content .jumbotron h1 {
   margin-bottom: 5px;
 }
+body.cv #content ul li {
+  margin-bottom: 3px;
+}
+body.cv #content ul li:last-child {
+  margin-bottom: 0;
+}
 .lato {
   font-family: Lato, sans-serif;
   color: #ecf0f1;
@@ -2289,6 +2321,9 @@ body.cv #content .jumbotron h1 {
   line-height: normal;
 }
 .small {
+  font-size: 12px;
+}
+.smaller {
   font-size: 11px;
 }
 body {
@@ -2308,20 +2343,29 @@ header {
 header nav li a {
   color: rgba(52, 152, 219, 0.7);
 }
-header nav li a.activer,
+header nav li a.active,
 header nav li a:hover,
 header nav li a.clicked {
   background: rgba(0, 0, 0, 0.5);
+  color: #3498db;
+}
+a {
+  color: #3498db;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
+}
+a:hover {
   color: #3498db;
 }
 body.cv #content p {
   margin-top: 0;
 }
 body.cv #content .jumbotron p {
-  color: #c0392b;
+  color: #e74c3c;
   font-weight: bold;
+}
+body.cv #content .jumbotron p .small {
+  color: #f39c12;
 }
 body.cv #content .contact a .github {
   background: url('/assets/images/github.png');
@@ -2331,4 +2375,20 @@ body.cv #content .contact a .github {
 }
 body.cv #content .contact a .glyphicon {
   font-size: 30px;
+}
+body.cv #content ul li {
+  color: #3498db;
+}
+body.cv #content ul li p,
+body.cv #content ul li span {
+  color: #ecf0f1;
+}
+body.cv #content ul li span.date {
+  color: #f39c12;
+}
+body.cv #content ul li label {
+  color: #e74c3c;
+}
+body.cv #content .date {
+  font-size: 12px;
 }

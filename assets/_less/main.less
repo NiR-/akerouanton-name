@@ -17,15 +17,23 @@ header {
 
 	nav li {
 		a {
-			color: rgba(52, 152, 219,0.7);
+			color: @blue-header-alpha;
 		}
-		a.activer, a:hover, a.clicked {
+		a.active, a:hover, a.clicked {
 			background: @bg-black;
-			-webkit-transition: all 0.2s ease-in-out;
-			transition: all 0.2s ease-in-out;
-			color: rgba(52, 152, 219,1.0);
+			color: @blue-header;
 		}
 	}
+}
+
+a {
+	color: @blue-header;
+
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+a:hover {
+	color: @blue;
 }
 
 body.cv {
@@ -37,6 +45,10 @@ body.cv {
 		.jumbotron p {
 			color: @red;
 			font-weight: bold;
+
+			.small {
+				color: @orange;
+			}
 		}
 
 		.contact {
@@ -51,6 +63,24 @@ body.cv {
 					font-size: 30px;
 				}
 			}
+		}
+
+		ul li {
+			color: @blue;
+
+			p, span {
+				color: @white;
+			}
+			span.date {
+				color: @orange;
+			}
+			label {
+				color: @red;
+			}
+		}
+
+		.date {
+			.small;
 		}
 	}
 }
