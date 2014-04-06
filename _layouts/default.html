@@ -15,19 +15,29 @@
         <![endif]-->
     </head>
 
-    <body>
-        <nav>
-            <ul>
-                <li><a href="/" class="home"><span class="glyphicon glyphicon-home"></span></li>
-                    <li><a href="/cv">CV</a></li>
-            </ul>
-        </nav>
+    <body class="{{ page.body_class }}">
+        <header>
+            <nav>
+                <ul>
+                    <li class="home">
+                        <a href="/" class="home {% if page.menu_item == 'home' %}active{% endif %}">
+                            <span class="glyphicon glyphicon-home"></span>
+                        </a>
+                    </li>
+                    <li class="docs">
+                        <a href="/docs.html" class="{% if page.menu_item == 'docs' %}active{% endif %}">Documentation</a>
+                    </li>
+                    <li class="cv">
+                        <a href="/cv.html" class="{% if page.menu_item == 'cv' %}active{% endif %}">CV</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
 
         <div id="content">
             {{ content }}
         </div>
 
         <script src="/assets/js/jquery.min.js"></script>
-        <script src="/assets/js/boostrap.min.js"></script>
     </body>
 </html>

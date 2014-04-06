@@ -1,12 +1,56 @@
 @import "scaffolding.less";
 @import "normalize.less";
 @import "glyphicons.less";
-@import "mixins.less";
-@import "grid.less";
-@import "utilities.less";
-@import "variables.less";
-@import "responsive-utilities.less";
+
+@import "layout.less";
+@import "vars.less";
+@import "fonts.less";
 
 body {
-    background: #cacaca;
+    background: @bg-grey;
+    .ubuntu;
+}
+
+header {
+	background: @bg-black-alpha;
+	.lato;
+
+	nav li {
+		a {
+			color: rgba(52, 152, 219,0.7);
+		}
+		a.activer, a:hover, a.clicked {
+			background: @bg-black;
+			-webkit-transition: all 0.2s ease-in-out;
+			transition: all 0.2s ease-in-out;
+			color: rgba(52, 152, 219,1.0);
+		}
+	}
+}
+
+body.cv {
+	#content {
+		p {
+			margin-top: 0;
+		}
+
+		.jumbotron p {
+			color: @red;
+			font-weight: bold;
+		}
+
+		.contact {
+			a {
+				.github {
+					background: url('/assets/images/github.png');
+					width: 40px;
+					height: 40px;
+					display: inline-block;
+				}
+				.glyphicon {
+					font-size: 30px;
+				}
+			}
+		}
+	}
 }

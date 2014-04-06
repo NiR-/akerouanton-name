@@ -1,0 +1,80 @@
+@import "mixins.less";
+@import "grid.less";
+@import "utilities.less";
+@import "variables.less";
+@import "responsive-utilities.less";
+
+@import "vars.less";
+
+header {
+	margin: 0 auto;
+	width: 100%;
+
+	nav {
+		.container;
+
+		ul {
+			.make-row();
+			.clearfix;
+
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+
+			font-size: 0;
+			line-height: 0;
+
+			li {
+				display: inline-block;
+				padding: 0;
+
+				font-size: @font-size-base;
+				line-height: @line-height-computed;
+
+				&.home {
+					margin-right: 50px;
+				}
+				&.cv {
+					float: right;
+				}
+
+				a {
+					display: inline-block;
+					width: 100%;
+					height: 100%;
+					padding: 12px;
+				}
+			}
+		}
+	}
+}
+
+#content {
+	.container;
+	padding-top: 30px;
+}
+
+body.cv {
+	#content {
+		.row > div {
+			.make-sm-column(12);
+			.make-md-column(6);
+		}
+
+		.row:last-child > div {
+			.make-sm-column(12);
+			.make-md-column(5);
+
+			&.langues {
+				.make-sm-column(12);
+				.make-md-column(2);
+			}
+		}
+
+		.jumbotron {
+			h1 {
+				margin-bottom: 5px;
+			}
+		}
+	}
+}
