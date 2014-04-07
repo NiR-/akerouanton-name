@@ -2084,6 +2084,9 @@ td.visible-print {
 header {
   margin: 0 auto;
   width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 10;
 }
 header nav {
   margin-right: auto;
@@ -2187,6 +2190,8 @@ header nav ul li a {
   padding-left: 15px;
   padding-right: 15px;
   padding-top: 30px;
+  margin-top: 44px;
+  z-index: 0;
 }
 #content:before,
 #content:after {
@@ -2238,6 +2243,15 @@ body.cv #content .row:first-child > div.contact .label {
 }
 body.cv #content .row:first-child > div.contact .pictos {
   padding: 0 10px;
+}
+body.cv #content .row:first-child > div.contact .pictos a {
+  margin-right: 5px;
+}
+body.cv #content .row:first-child > div.contact .pictos a a:last-child {
+  margin-right: 0;
+}
+body.cv #content .row:first-child > div.contact .email {
+  display: none;
 }
 body.cv #content .row > div {
   position: relative;
@@ -2331,7 +2345,8 @@ body {
   line-height: normal;
 }
 header {
-  background: rgba(0, 0, 0, 0.3);
+  background: #243341;
+  border-bottom: 1px solid #34495e;
   font-family: Lato, sans-serif;
   color: #ecf0f1;
   font-size: 14px;
@@ -2343,7 +2358,7 @@ header nav li a {
 header nav li a.active,
 header nav li a:hover,
 header nav li a.clicked {
-  background: rgba(0, 0, 0, 0.5);
+  background: #121920;
   color: #3498db;
 }
 a {
@@ -2366,8 +2381,8 @@ body.cv #content .jumbotron p .small {
 }
 body.cv #content .contact a .github {
   background: url('/assets/images/github.png');
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   display: inline-block;
 }
 body.cv #content .contact a .glyphicon {

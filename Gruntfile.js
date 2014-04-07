@@ -16,6 +16,11 @@ module.exports = function (grunt) {
                 files: {
                     'assets/js/jquery.min.js': 'bower_components/jquery/jquery.js'
                 }
+            },
+            app: {
+                files: {
+                    'assets/js/main.min.js': 'assets/js/main.js'
+                }
             }
         }, 
         copy: {

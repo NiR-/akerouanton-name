@@ -9,6 +9,9 @@
 header {
 	margin: 0 auto;
 	width: 100%;
+	position: fixed;
+	top: 0;
+	z-index: 10;
 
 	nav {
 		.container;
@@ -52,6 +55,8 @@ header {
 #content {
 	.container;
 	padding-top: 30px;
+	margin-top: 44px;
+	z-index: 0;
 }
 
 body.cv {
@@ -70,6 +75,17 @@ body.cv {
 					}
 					.pictos {
 						padding: 0 10px;
+
+						a {
+							margin-right: 5px;
+
+							a:last-child {
+								margin-right: 0;
+							}
+						}
+					}
+					.email {
+						display: none;
 					}
 				}
 			}
