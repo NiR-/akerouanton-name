@@ -2088,6 +2088,22 @@ header {
   top: 0;
   z-index: 10;
 }
+header:before,
+header:after {
+  content: " ";
+  display: table;
+}
+header:after {
+  clear: both;
+}
+header:before,
+header:after {
+  content: " ";
+  display: table;
+}
+header:after {
+  clear: both;
+}
 header nav {
   margin-right: auto;
   margin-left: auto;
