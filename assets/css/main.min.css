@@ -2379,14 +2379,15 @@ body.cv #content .jumbotron p {
 body.cv #content .jumbotron p .small {
   color: #f39c12;
 }
+body.cv #content .contact a {
+  color: #617180;
+  font-size: 32px;
+}
 body.cv #content .contact a .github {
   background: url('/assets/images/github.png');
   width: 32px;
   height: 32px;
   display: inline-block;
-}
-body.cv #content .contact a .glyphicon {
-  font-size: 30px;
 }
 body.cv #content ul li {
   color: #3498db;
