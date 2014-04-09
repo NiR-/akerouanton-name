@@ -2187,12 +2187,12 @@ header nav ul li {
   padding: 0;
   font-size: 14px;
   line-height: 20px;
+  /* &.cv {
+					float: right;
+				} */
 }
 header nav ul li.home {
   margin-right: 50px;
-}
-header nav ul li.cv {
-  float: right;
 }
 header nav ul li a {
   display: inline-block;
