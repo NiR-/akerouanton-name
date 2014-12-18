@@ -2,4 +2,4 @@ name: 'Albin Kerouanton'
 markdown: redcarpet
 pygments: true
 permalink: none
-exclude: ['Gemfile', 'Gemfile.lock', 'Gruntfile.js', 'bower.json', 'package.json', 'bower_components', 'node_modules']
+exclude: ['Gemfile', 'Gemfile.lock', 'Gruntfile.js', 'bower.json', 'package.json', 'bower_components', 'node_modules', 'vagrant', 'config', 'Capfile']
