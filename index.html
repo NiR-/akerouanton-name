@@ -3,14 +3,10 @@ layout: default
 title: Accueil
 ---
 
-<p>Quelques cheatsheet utiles quand on a un trou de mémoire :</p>
+<p>Quelques cheatsheet utiles :</p>
 
 <ul>
-	<li><a href="http://symfony2cheatsheet.com/" class="external" target="_blank">Symfony2 CheatSheet</a></li>
-	<li><a href="http://composer.json.jolicode.com/" class="external" target="_blank">Composer.json Schema CheatSheet</a></li>
-	<li><a href="http://wall-skills.com/2013/git-cheat-sheet/" class="external" target="_blank">Git CheatSheet</a></li>
-	<li><a href="https://raw.githubusercontent.com/osscafe/gulp-cheatsheet/master/images/en-js-p1.png" class="external" target="_blank">Gulp.js CheatSheet</a></li>
-	<li><a href="http://overapi.com/regex/" class="external" target="_blank">RegExp CheatSheet</a></li>
-	<li><a href="http://overapi.com/ruby/" class="external" target="_blank">Ruby CheatSheet</a></li>
-	<li><a href="http://jessewarden.com/archives/node-bower-grunt-cheat-sheet-v1-jessewarden.com.pdf" class="external" target="_blank">npm CheatSheet</a></li>
+	{% for doc in site.cheatsheet %}
+		<li><a href="{{ doc.link }}" class="external" target="_blank">{{ doc.title }}</a></li>
+	{% endfor %}
 </ul>
