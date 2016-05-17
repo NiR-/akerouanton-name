@@ -22,6 +22,8 @@ build-prod: build-dev
 	@docker run -v $(shell pwd)/_site:/usr/src/app/_site --rm --user $(shell id -u):$(shell id -g) akerouanton-name:dev jekyll build
 	@docker build -f docker/Dockerfile -t akerouanton-name:prod .
 
+up: start
+
 start:
 ifeq (dev, $(ENV))
 	@docker run -v $(shell pwd):/usr/src/app -d -p 80:4000 --name akerouanton-name-dev akerouanton-name:dev
