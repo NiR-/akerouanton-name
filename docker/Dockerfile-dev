@@ -1,0 +1,21 @@
+FROM ruby:2.1
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends nodejs npm && \
+    ln -s /usr/bin/nodejs /usr/bin/node && \
+    rm -rf /var/cache/apt/*
+
+WORKDIR /usr/src/app
+
+COPY Gemfile /usr/src/app/
+RUN bundle install
+
+COPY package.json bower.json Gruntfile.js /usr/src/app/
+RUN npm install && \
+    node_modules/.bin/bower --allow-root install && \
+    node_modules/.bin/grunt && \
+    rm -rf ~/.npm
+
+COPY . /usr/src/app/
+
+CMD ["jekyll", "server", "-w", "--host", "0.0.0.0"]

@@ -1,15 +1,16 @@
 {
-    "name": "nir-.github.io", 
-    "version": "0.1.0", 
-    "dependencies": {
-        "grunt": "~0.4.1", 
-        "grunt-contrib-less": "*", 
-        "grunt-contrib-uglify": "*", 
-        "grunt-contrib-copy": "*", 
-        "bower": "*", 
-        "grunt-exec": "*"
-    }, 
-    "engines": {
-        "npm": "1.2.x"
-    }
+  "name": "nir-.github.io",
+  "version": "0.1.0",
+  "dependencies": {
+    "bower": "*",
+    "grunt": "~0.4.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-copy": "*",
+    "grunt-contrib-less": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-exec": "*"
+  },
+  "engines": {
+    "npm": "1.2.x"
+  }
 }
