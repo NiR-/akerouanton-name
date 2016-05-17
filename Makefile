@@ -1,4 +1,4 @@
-.PHONY: build-dev build-prod start stop logs introspect ps restart
+.PHONY: build-dev build-prod start stop logs introspect ps restart test
 
 ENV?=dev
 SHELL=bash
@@ -42,3 +42,6 @@ ps:
 	@docker ps | grep akerouanton-name
 
 restart: stop start
+
+test:
+	@wget -qO /dev/null http://localhost/

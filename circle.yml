@@ -1,0 +1,9 @@
+machine:
+  services:
+    - docker
+
+test:
+  pre:
+    - make build start ENV=prod
+  override:
+    - make test
