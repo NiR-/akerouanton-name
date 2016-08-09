@@ -1,4 +1,4 @@
-.PHONY: build-dev build-prod start stop logs introspect ps restart test
+.PHONY: build build-dev build-prod up start stop logs introspect ps restart test
 
 ENV?=dev
 SHELL=bash

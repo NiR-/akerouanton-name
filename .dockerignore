@@ -1,4 +1,7 @@
+.idea/
 .git/
 bower_components/
 node_modules/
 vendor/
+/.editorconfig
+/.gitignore
