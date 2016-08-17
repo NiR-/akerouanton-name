@@ -1,0 +1,31 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+    - name: Log into Docker Hub
+      docker_login:
+        username: "{{ lookup('env', 'DOCKER_USER') }}"
+        email: "{{ lookup('env', 'DOCKER_EMAIL') }}"
+        password: "{{ lookup('env', 'DOCKER_PASS') }}"
+      register: docker_login
+    - debug: var=docker_login
+    - name: Pull image
+      docker_image:
+        name: nir00/akerouanton-name
+        tag: latest
+        force: yes
+      register: docker_pull
+    - debug: var=docker_pull
+    - name: Run the latest container
+      docker_service:
+        project_name: akerouanton-name
+        definition:
+          version: '2'
+          services:
+            web:
+              image: nir00/akerouanton-name:latest
+              restart: always
+              ports:
+                - "80:80"
+      register: docker_service
+    - debug: var=docker_service

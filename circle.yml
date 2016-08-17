@@ -3,10 +3,14 @@ machine:
     - curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
   services:
     - docker
+  python:
+    version: 2.7
 
 dependencies:
   override:
-    - echo 'Nothing to do here!'
+    # - echo 'Nothing to do here!'
+    - pip install --upgrade setuptools
+    - pip install ansible
 
 test:
   pre:
@@ -23,3 +27,4 @@ deployment:
       - docker tag akerouanton-name:prod nir00/akerouanton-name:latest
       - docker push nir00/akerouanton-name:$CIRCLE_SHA1
       - docker push nir00/akerouanton-name:latest
+      - make deploy

@@ -1,4 +1,4 @@
-.PHONY: build build-dev build-prod up start stop logs introspect ps restart test
+.PHONY: build build-dev build-prod up start stop logs introspect ps restart test build-hosts-file deploy
 
 ENV?=dev
 SHELL=bash
@@ -47,3 +47,9 @@ restart: stop start
 
 test:
 	@wget -qO /dev/null http://localhost/
+
+build-hosts-file:
+	@echo "container_host ansible_host=$(DEPLOY_IP) ansible_user=$(DEPLOY_USER)" > ansible/hosts
+
+deploy: build-hosts-file
+	cd ansible && ansible-playbook -i hosts deploy.yml
