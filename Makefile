@@ -1,4 +1,4 @@
-.PHONY: build build-dev build-prod up start stop logs introspect ps restart test build-hosts-file deploy
+.PHONY: build build-dev build-prod up start stop logs introspect ps restart test build-hosts-file deploy ps run
 
 ENV?=dev
 SHELL=bash
@@ -24,6 +24,8 @@ build-prod: build-dev
 
 up: start
 
+run: start
+
 start:
 ifeq (dev, $(ENV))
 	@docker run -v $(shell pwd):/usr/src/app -d -p 80:4000 --name akerouanton-name-dev akerouanton-name:dev
@@ -41,7 +43,7 @@ introspect:
 	@docker exec -it akerouanton-name-$(ENV) $(SHELL)
 
 ps:
-	@docker ps | grep akerouanton-name
+	+@docker ps -a | grep akerouanton-name
 
 restart: stop start
 
@@ -53,3 +55,6 @@ build-hosts-file:
 
 deploy: build-hosts-file
 	cd ansible && ansible-playbook -i hosts deploy.yml
+
+rm:
+	docker rm akerouanton-name-$(ENV)

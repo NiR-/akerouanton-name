@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'jekyll', '~> 2.5'
+gem 'jekyll', '~> 3.2'
+gem 'redcarpet'
 gem 'hitimes'
