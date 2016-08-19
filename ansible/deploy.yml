@@ -2,21 +2,35 @@
 - hosts: all
   gather_facts: no
   tasks:
-    - name: Log into Docker Hub
-      docker_login:
-        username: "{{ lookup('env', 'DOCKER_USER') }}"
-        email: "{{ lookup('env', 'DOCKER_EMAIL') }}"
-        password: "{{ lookup('env', 'DOCKER_PASS') }}"
-      register: docker_login
-    - debug: var=docker_login
-    - name: Pull image
+    # Pull the image to deploy
+    - name: Pull latest image
       docker_image:
         name: nir00/akerouanton-name
         tag: latest
         force: yes
       register: docker_pull
     - debug: var=docker_pull
-    - name: Run the latest container
+
+    # Create network if necessary
+    - name: Check if akerouantonname_default network exists
+      command: docker network inspect akerouantonname_default
+      failed_when: false
+      register: net_exists
+    - name: Create akerouantonname_default network
+      command: docker network create akerouantonname_default
+      when: net_exists.rc != 0
+
+    # Add proxy container to the network
+    - name: Check if nginx-proxy is already associated to the network
+      command: docker inspect -f {%raw%}"{{.NetworkSettings.Networks.akerouantonname_default}}"{%endraw%} proxy
+      register: is_proxy_associated
+    - name: Add proxy container to the network
+      command: docker network connect akerouantonname_default proxy
+      when: "'<no value>' in is_proxy_associated.stdout"
+      register: add_proxy_to_net
+
+    # Finally run the latest container
+    - name: Run latest container
       docker_service:
         project_name: akerouanton-name
         definition:
@@ -25,7 +39,8 @@
             web:
               image: nir00/akerouanton-name:latest
               restart: always
-              ports:
-                - "80:80"
+              environment:
+                - VIRTUAL_HOST=akerouanton.name,www.akerouanton.name
+                - VIRTUAL_PORT=80
       register: docker_service
     - debug: var=docker_service

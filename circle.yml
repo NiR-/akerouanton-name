@@ -14,7 +14,7 @@ dependencies:
 
 test:
   pre:
-    - make build start ENV=prod SHA1=$(CIRCLE_SHA1)
+    - make build start ENV=prod SHA1=${CIRCLE_SHA1}
   override:
     - make test
 
