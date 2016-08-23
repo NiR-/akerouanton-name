@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+#set -o xtrace
+
+function error {
+  echo "Error: $1"
+  exit 1
+}
+
+cd $(dirname ${0})
+
+if [ "${CIRCLE_BRANCH:-}" = "master" ]; then
+    ansible-playbook -i hosts deploy.yml
+elif [ -n "${CIRCLE_TAG:-}" ]; then
+  ansible-playbook -i hosts \
+    -e project_name=akerouantonnameqa \
+    -e image=nir00/akerouanton-name \
+    -e tag=latest-qa \
+    -e virtual_hosts="qa.akerouanton.name" \
+    deploy.yml
+elif [ -n "${CIRCLE_BRANCH:-}" ]; then
+  [ -z "${CIRCLE_SHA1:-}" ] && error "CIRCLE_SHA1 should be defined."
+
+  ansible-playbook -i hosts \
+    -e project_name=akerouantonname${CIRCLE_BRANCH//[^[:alpha:]]/} \
+    -e image=nir00/akerouanton-name \
+    -e tag=dev-${CIRCLE_SHA1:0:8} \
+    -e virtual_hosts="${CIRCLE_BRANCH//[^[:alpha:]]/-}.dev.akerouanton.name" \
+    deploy.yml
+fi

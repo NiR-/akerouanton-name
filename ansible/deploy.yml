@@ -40,4 +40,7 @@
                 - VIRTUAL_HOST={{ virtual_hosts }}
                 - VIRTUAL_PORT=80
       register: docker_service
+
+    - debug: var=virtual_hosts
+
     - debug: var=docker_service

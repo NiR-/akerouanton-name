@@ -14,7 +14,7 @@ dependencies:
 
 test:
   pre:
-    - make build start ENV=prod SHA1=${CIRCLE_SHA1}
+    - make build start ENV=prod
   override:
     - make test
 
@@ -22,11 +22,16 @@ deployment:
   prod:
     branch: master
     commands:
-      - ansible/publish-image.sh
+      - ansible/publish-image
       - make deploy
-  qa:
+  qa-tags:
     tag: /qa-.*/
     owner: NiR-
     commands:
       - ansible/publish-image
-      - make deploy-qa
+      - make deploy
+  feature-branches:
+    branch: /feature\/.*/
+    commands:
+      - ansible/publish-image
+      - make deploy

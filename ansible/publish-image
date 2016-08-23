@@ -16,17 +16,23 @@ if [ -z "$(docker info 2>/dev/null | grep 'Username')" ]; then
   docker login -e ${DOCKER_EMAIL} -u ${DOCKER_USER} -p ${DOCKER_PASS}
 fi
 
-[ "${CIRCLE_BRANCH:-}" = "master" ] && IMAGE_TYPE="prod" || IMAGE_TYPE="qa"
+IMAGE_TYPE="dev"
+if [ "${CIRCLE_BRANCH:-}" = "master" ]; then
+    IMAGE_TYPE="prod"
+elif [ -n "${CIRCLE_TAG:-}" ]; then
+    IMAGE_TYPE="qa"
+fi
+
 SHORT_HASH=${CIRCLE_SHA1:0:8}
 IMAGE_TAG=${IMAGE_TYPE}-${SHORT_HASH}
 
 docker tag akerouanton-name:prod nir00/akerouanton-name:${IMAGE_TAG}
 docker push nir00/akerouanton-name:${IMAGE_TAG}
 
-if [ "${CIRLCE_BRANCH:-}" = "master" ]; then
+if [ "${IMAGE_TYPE}" = "prod" ]; then
   docker tag akerouanton-name:prod nir00/akerouanton-name:latest
   docker push nir00/akerouanton-name:latest
-else
+elif [ "${IMAGE_TYPE}" = "qa" ]; then
   docker tag akerouanton-name:prod nir00/akerouanton-name:latest-qa
   docker push nir00/akerouanton-name:latest-qa
 fi

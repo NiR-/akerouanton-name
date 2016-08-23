@@ -1,7 +1,9 @@
-.PHONY: build build-dev build-prod up start stop logs introspect ps restart test build-hosts-file deploy ps run
+.PHONY: build build-dev build-prod up start stop logs introspect ps restart test build-hosts-file ps run rm deploy
+.PHONY: deploy-qa deploy-feature
 
 ENV?=dev
 SHELL=bash
+
 
 ifeq (prod, $(ENV))
 	SHELL=sh
@@ -15,12 +17,12 @@ else ifeq (prod, $(ENV))
 endif
 
 build-dev:
-	@docker build -f docker/Dockerfile-dev -t akerouanton-name:dev .
+	docker build -f docker/Dockerfile-dev -t akerouanton-name:dev .
 
 build-prod: build-dev
 	@if [ ! -d _site ]; then mkdir _site; fi
-	@docker run -v $(shell pwd)/_site:/usr/src/app/_site --rm --user $(shell id -u):$(shell id -g) akerouanton-name:dev jekyll build
-	@docker build -f docker/Dockerfile -t akerouanton-name:prod .
+	docker run -v $(shell pwd)/_site:/usr/src/app/_site --rm --user $(shell id -u):$(shell id -g) akerouanton-name:dev jekyll build
+	docker build -f docker/Dockerfile -t akerouanton-name:prod .
 
 up: start
 
@@ -54,15 +56,7 @@ build-hosts-file:
 	@echo "container_host ansible_host=$(DEPLOY_IP) ansible_user=$(DEPLOY_USER)" > ansible/hosts
 
 deploy: build-hosts-file
-	cd ansible && ansible-playbook -i hosts deploy.yml
-
-deploy-qa: build-hosts-file
-	cd ansible && \
-	ansible-playbook -i hosts \
-		-e project_name=akerouantonnameqa \
-		-e image=nir00/akerouanton-name \
-		-e tag=latest-qa \
-		-e virtual_hosts="qa.akerouanton.name" deploy.yml
+	ansible/deploy
 
 rm:
 	docker rm akerouanton-name-$(ENV)
