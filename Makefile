@@ -56,5 +56,13 @@ build-hosts-file:
 deploy: build-hosts-file
 	cd ansible && ansible-playbook -i hosts deploy.yml
 
+deploy-qa: build-hosts-file
+	cd ansible && \
+	ansible-playbook -i hosts \
+		-e project_name=akerouantonnameqa \
+		-e image=nir00/akerouanton-name \
+		-e tag=latest-qa \
+		-e virtual_hosts="qa.akerouanton.name" deploy.yml
+
 rm:
 	docker rm akerouanton-name-$(ENV)

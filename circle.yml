@@ -19,12 +19,14 @@ test:
     - make test
 
 deployment:
-  hub:
+  prod:
     branch: master
     commands:
-      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - docker tag akerouanton-name:prod nir00/akerouanton-name:$CIRCLE_SHA1
-      - docker tag akerouanton-name:prod nir00/akerouanton-name:latest
-      - docker push nir00/akerouanton-name:$CIRCLE_SHA1
-      - docker push nir00/akerouanton-name:latest
+      - ansible/publish-image.sh
       - make deploy
+  qa:
+    tag: /qa-.*/
+    owner: NiR-
+    commands:
+      - ansible/publish-image
+      - make deploy-qa

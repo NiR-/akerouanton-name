@@ -1,46 +1,43 @@
 ---
 - hosts: all
   gather_facts: no
+  vars_files:
+    - 'config.yml'
   tasks:
-    # Pull the image to deploy
-    - name: Pull latest image
-      docker_image:
-        name: nir00/akerouanton-name
-        tag: latest
-        force: yes
-      register: docker_pull
-    - debug: var=docker_pull
+    - name: Pull the latest image
+      command: "docker pull {{ image }}:{{ tag }}"
 
     # Create network if necessary
-    - name: Check if akerouantonname_default network exists
-      command: docker network inspect akerouantonname_default
+    - name: Check if the default network exists
+      command: "docker network inspect {{ project_name }}_default"
       failed_when: false
       register: net_exists
-    - name: Create akerouantonname_default network
-      command: docker network create akerouantonname_default
+    - name: Create the default network
+      command: "docker network create {{ project_name }}_default"
       when: net_exists.rc != 0
 
     # Add proxy container to the network
     - name: Check if nginx-proxy is already associated to the network
-      command: docker inspect -f {%raw%}"{{.NetworkSettings.Networks.akerouantonname_default}}"{%endraw%} proxy
+      command: 'docker inspect -f {%raw%}"{{.NetworkSettings.Networks.{%endraw%}{{ project_name }}{%raw%}_default}}"{%endraw%} proxy'
       register: is_proxy_associated
     - name: Add proxy container to the network
-      command: docker network connect akerouantonname_default proxy
+      command: "docker network connect {{ project_name }}_default proxy"
       when: "'<no value>' in is_proxy_associated.stdout"
       register: add_proxy_to_net
 
     # Finally run the latest container
     - name: Run latest container
       docker_service:
-        project_name: akerouanton-name
+        project_name: "{{ project_name }}"
+        # pull: yes
         definition:
           version: '2'
           services:
             web:
-              image: nir00/akerouanton-name:latest
+              image: "{{ image }}:{{ tag }}"
               restart: always
               environment:
-                - VIRTUAL_HOST=akerouanton.name,www.akerouanton.name
+                - VIRTUAL_HOST={{ virtual_hosts }}
                 - VIRTUAL_PORT=80
       register: docker_service
     - debug: var=docker_service
