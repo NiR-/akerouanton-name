@@ -14,17 +14,24 @@ dependencies:
 
 test:
   pre:
-    - make build start ENV=prod SHA1=${CIRCLE_SHA1}
+    - make build start ENV=prod
   override:
     - make test
 
 deployment:
-  hub:
+  prod:
     branch: master
     commands:
-      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - docker tag akerouanton-name:prod nir00/akerouanton-name:$CIRCLE_SHA1
-      - docker tag akerouanton-name:prod nir00/akerouanton-name:latest
-      - docker push nir00/akerouanton-name:$CIRCLE_SHA1
-      - docker push nir00/akerouanton-name:latest
+      - ansible/publish-image
+      - make deploy
+  qa-tags:
+    tag: /qa-.*/
+    owner: NiR-
+    commands:
+      - ansible/publish-image
+      - make deploy
+  feature-branches:
+    branch: /feature\/.*/
+    commands:
+      - ansible/publish-image
       - make deploy

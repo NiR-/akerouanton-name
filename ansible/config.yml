@@ -1,0 +1,5 @@
+---
+project_name: akerouantonname
+image: nir00/akerouanton-name
+tag: latest
+virtual_hosts: 'akerouanton.name,www.akerouanton.name'
