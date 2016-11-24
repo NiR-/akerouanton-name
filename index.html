@@ -3,10 +3,16 @@ layout: default
 title: Accueil
 ---
 
+<ul>
+{% for post in site.posts %}
+    <li><a href="{{ post.url }}">{{ post.title}}</a></li>
+{% endfor %}
+</ul>
+
 <p>Quelques cheatsheet utiles :</p>
 
 <ul>
-	{% for doc in site.cheatsheet %}
+    {# {% for doc in site.cheatsheet %}
 		<li><a href="{{ doc.link }}" class="external" target="_blank">{{ doc.title }}</a></li>
-	{% endfor %}
+        {% endfor %} #}
 </ul>

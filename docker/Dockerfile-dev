@@ -18,4 +18,4 @@ RUN npm install && \
 
 COPY . /usr/src/app/
 
-CMD ["jekyll", "server", "-w", "--host", "0.0.0.0"]
+CMD ["jekyll", "serve", "-w", "--host", "0.0.0.0"]
